@@ -1,0 +1,422 @@
+{\rtf1\ansi\ansicpg1252\deff0\nouicompat\deflang1033{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Calibri;}}
+{\colortbl ;\red0\green0\blue255;}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9\tab\tab\tab\tab\b\fs32 SCALA L2 ASSIGNMENTS\b0\fs22\par
+\b\fs24 Collections:\fs22\par
+1. Set up a map of prices for a number of gizmos that you covet. Then produce a second map with the same keys and the prices at a 10 percent discount.\par
+Sol:-\par
+\b0 val m1=Map("Keyboard"->300,"Mouse"->20,"Grapes"->200)\par
+val m2=for((k,v)<-m1)yield(k,v*0.9)\par
+println(m2)\par
+\b 2. Write a program that reads words from a file. Use a mutable map to count how often each word \par
+appears. To read the words, simply use a java.util.Scanner:\par
+val in = new java.util.Scanner(java.io.File("myfile.txt"))\par
+while (in.hasNext()) process in.next() At the end, print out all words and their counts.\par
+Sol:-\par
+\par
+\b0 object MyClass \par
+\{\par
+  def main(args: Array[String]) \par
+\{\par
+       val in = new java.util.Scanner(java.io.File("myfile.txt"))\par
+while (in.hasNext()) process in.next() At the end, print out all words and their counts.\par
+val fileName = "C:\\Users\\Riddhish Ranjan\\Pictures\\myFile"\par
+  var in = new java.util.Scanner(new java.io.File(fileName))\par
+  val map = new scala.collection.mutable.HashMap[String, Int]()\par
+    def process(s: String) = \par
+\{\par
+\tab val c = mMap.getOrElse(s, 0);\par
+\tab map(s) = c + 1\par
+\}                                               \par
+while(in.hasNext()) process(in.next())\par
+map  \par
+    \}\par
+\}\par
+\b 3.Create an Employee class with the related attributes and behaviours. Create one more class \par
+EmployeeDB which has the following methods.\par
+a. boolean addEmployee(Employee e)\par
+b. boolean deleteEmployee(int eCode)\par
+c. String showPaySlip(int eCode)\par
+d. Employee[] listAll()\par
+Use an ArrayList which will be used to store the emplyees and use enumeration/iterator to process the employees.\par
+Sol:-\par
+\b0 import java.util.ArrayList\par
+import java.util.Iterator\par
+import java.util.List\par
+class Employee(var employeeID: String,var employeeName: String,var location: String,var sal: Int)\par
+\{\par
+\tab def getEmployeeName(employeeID: String): String = \par
+\tab\{\par
+              \tab\tab  if (employeeID == "20203278") return employeeName else "Not Found"\par
+   \tab  \}\par
+   \tab def incrementSalary(employeeID: String,salaryIncrPct: Double = 0.5): Double =\par
+\tab  \{\par
+         \tab\tab if (employeeID == "20203278") return (sal * ( 1 + salaryIncrPct)) else 0\par
+    \tab  \}\par
+ \tab def getEmployeeId():Int=\par
+\tab\{\par
+        \tab\tab return employeeID.toInt\par
+    \tab\}\par
+     \tab def getEmployeeSalary():Int=\par
+\tab\{\par
+        \tab\tab return sal\par
+   \tab  \}    \par
+\}\par
+object Emp\par
+\{\par
+    \tab def main(args:Array[String])\par
+\tab\{\par
+         \tab var emp = new Employee("20203278","Riddhish","Odisha",25000)\par
+       \tab  var dict=new EmployeeDict();\par
+       \tab  dict.addEmployee(emp)\par
+        \tab println("Employee Name: " + emp.getEmployeeName(emp.employeeID))\par
+        \tab println("increment salary is: " + emp.incrementSalary(emp.employeeID))\par
+     \tab  println("showPaySlipReport : " +dict.showPaySlipReport(emp.employeeID.toInt))\par
+    \tab\}\par
+\}\par
+class EmployeeDict \par
+\{\par
+  \tab var employeeDict: List[Employee] = new ArrayList()\par
+ \tab  def addEmployee(e: Employee): Boolean = employeeDict.add(e)\par
+\tab def deleteEmployee(employeeId: Int): Boolean = \par
+\tab\{\par
+    \tab\tab var isRemoved: Boolean = false\par
+    \tab\tab val itr: Iterator[Employee] = employeeDict.iterator()\par
+   \tab\tab  while (itr.hasNext)\par
+ \tab\tab\{\par
+      \tab\tab\tab val emp: Employee = itr.next()\par
+      \tab\tab\tab if (emp.getEmployeeId == employeeId) \par
+\tab\tab\tab\{\par
+       \tab\tab\tab\tab  isRemoved = true\par
+     \tab\tab\tab\tab    itr.remove()\par
+    \tab\tab\tab   \}\par
+   \tab\tab  \}\par
+   \tab\tab  isRemoved\par
+  \tab\}\par
+\tab def showPaySlipReport(employeeId: Int): String = \par
+\tab\{\par
+    \tab\tab var paySlipReport: String = "Invalid employee id"\par
+    \tab\tab val itr: Iterator[Employee] = employeeDict.iterator()\par
+   \tab\tab  while (itr.hasNext) \par
+\tab\tab\{\par
+      \tab\tab\tab val emp: Employee = itr.next()\par
+      \tab\tab\tab if (emp.getEmployeeId == employeeId) \par
+\tab\tab\tab\{\par
+        \tab\tab\tab\tab paySlipReport = "Pay slipReport for employee id " + \tab\tab\tab\tab\tab\tab employeeId + " is " + emp.getEmployeeSalary\par
+     \tab\tab\tab  \}\par
+    \tab\tab\}\par
+   \tab\tab  paySlipReport\par
+  \tab\}\par
+\tab def listAll(): Array[Employee] = \par
+\tab\{\par
+    \tab\tab val empArray: Array[Employee] = Array.ofDim[Employee](employeeDict.size)\par
+    \tab\tab for (i <- 0 until employeeDict.size) empArray(i) = employeeDict.get(i)\par
+    \tab\tab empArray\par
+  \tab\}\par
+\}\par
+\b Exceptions:\par
+1.Write a program to accept name and age of a person from the command prompt(passed as \par
+arguments when you execute the class) and ensure that the age entered is >=18 and < 60. Display \par
+proper error messages. The program must exit gracefully after displaying the error message in \par
+case the arguments passed are not proper. (Hint : Create a user defined exception class for \par
+handling errors.)\par
+Sol-\par
+\b0 class InvalidateAgeException(str:String) extends Exception(str) \par
+class ExceptionTest\par
+\{\par
+  \tab @throws(classOf[InvalidateAgeException])\par
+\tab def validate(name:String,age:Int)=\par
+    \tab\{\par
+        \tab\tab  if(age<18 || age>=60)\par
+        \tab\tab\{\par
+            \tab\tab throw new InvalidateAgeException("Mr."+name+" you are not elegible.")\par
+         \tab\tab\}\par
+        \tab\tab else\par
+        \tab\tab\{\par
+           \tab\tab\tab  println("Mr."+name+ " You are Elegible");\par
+      \tab\tab   \}\par
+      \tab  \}\par
+\}\par
+object example\par
+\{\par
+    def main(args:Array[String])\par
+\{\par
+  \tab var obj=new ExceptionTest()\par
+\tab try\par
+\tab\{\par
+               \tab\tab obj.validate(args(0),args(1).toInt)\par
+\tab\}\par
+ \tab catch\par
+        \tab\{\par
+            \tab\tab case exc:Exception=>println("exception occured:"+exc);\par
+       \tab  \}\par
+      \}\par
+\}\par
+\b 2.Write a Program to take care of Number Format Exception if user enters values other than integer for calculating average marks of 2 students. The name of the students and marks in 3 subjects are passed as arguments while executing the program.\par
+Sol:-\par
+i\b0 mport java.util.Scanner\par
+import java.lang.Exception\par
+object Part2_2 \par
+\{\par
+\tab   def main(args: Array[String]): Unit =\par
+\tab  \{\par
+   \tab\tab  val s: Scanner = new java.util.Scanner(System.in)\par
+   \tab\tab  for (i <- 0.until(2)) \par
+\tab\tab\{\par
+     \tab\tab\tab  var name: String = ""\par
+      \tab\tab\tab var subject1: Int = 0\par
+      \tab\tab\tab var subject2: Int = 0\par
+      \tab\tab\tab var subject3: Int = 0\par
+      \tab\tab\tab try\par
+\tab\tab\tab  \{\par
+        \tab\tab\tab\tab name = s.nextLine()\par
+        \tab\tab\tab\tab if (s.hasNextInt()) subject1 = s.nextInt()\par
+        \tab\tab\tab\tab else throw new NumberFormatException()\par
+        \tab\tab\tab\tab if (s.hasNextInt()) subject2 = s.nextInt()\par
+        \tab\tab\tab\tab else throw new NumberFormatException()\par
+       \tab\tab\tab\tab  if (s.hasNextInt()) subject3 = s.nextInt()\par
+        \tab\tab\tab\tab else throw new NumberFormatException()\par
+      \tab\tab\tab\}\par
+\tab\tab\tab  catch \par
+\tab\tab\tab\{\par
+          \tab\tab\tab  \tab  case exc: NumberFormatException => println("Exception "+ \tab\tab\tab\tab\tab exc)\par
+\tab\tab\tab\}\par
+      \tab\tab\tab println("Name: " + name)\par
+      \tab\tab\tab println("Marks of subject 1: " + subject1)\par
+      \tab\tab\tab println("Marks of subject 2: " + subject2)\par
+      \tab\tab\tab println("Marks of subject 3: " + subject3)\par
+      \tab\tab\tab println("Average :" + (subject1+subject2+subject3)/3)\par
+    \tab\tab\}\par
+    \tab\tab s.close()\par
+\tab   \}\par
+\}\par
+\b 3. Write a Program to take care of Number Format Exception if user enters values other that \par
+integer for calculating average marks of 2 students. The name of the students and marks in 3 \par
+subjects are passed as arguments while executing the program.\par
+Sol:-\par
+i\b0 mport java.util.Scanner\par
+import java.lang.Exception\par
+object Part2_3 \par
+\{\par
+\tab   def main(args: Array[String]): Unit =\par
+\tab  \{\par
+   \tab\tab  val s: Scanner = new java.util.Scanner(System.in)\par
+   \tab\tab  for (i <- 0.until(2)) \par
+\tab\tab\{\par
+     \tab\tab\tab  var name: String = ""\par
+      \tab\tab\tab var subject1: Int = 0\par
+      \tab\tab\tab var subject2: Int = 0\par
+      \tab\tab\tab var subject3: Int = 0\par
+      \tab\tab\tab try\par
+\tab\tab\tab  \{\par
+        \tab\tab\tab\tab name = s.nextLine()\par
+        \tab\tab\tab\tab if (s.hasNextInt()) subject1 = s.nextInt()\par
+        \tab\tab\tab\tab else throw new NumberFormatException()\par
+        \tab\tab\tab\tab if (s.hasNextInt()) subject2 = s.nextInt()\par
+        \tab\tab\tab\tab else throw new NumberFormatException()\par
+       \tab\tab\tab\tab  if (s.hasNextInt()) subject3 = s.nextInt()\par
+        \tab\tab\tab\tab else throw new NumberFormatException()\par
+      \tab\tab\tab\}\par
+\tab\tab\tab  catch \par
+\tab\tab\tab\{\par
+          \tab\tab\tab  \tab  case exc: NumberFormatException => println("Exception "+ \tab\tab\tab\tab\tab exc)\par
+\tab\tab\tab\}\par
+      \tab\tab\tab println("Name: " + name)\par
+      \tab\tab\tab println("Marks of subject 1: " + subject1)\par
+      \tab\tab\tab println("Marks of subject 2: " + subject2)\par
+      \tab\tab\tab println("Marks of subject 3: " + subject3)\par
+      \tab\tab\tab println("Average :" + (subject1+subject2+subject3)/3)\par
+    \tab\tab\}\par
+    \tab\tab s.close()\par
+\tab   \}\par
+\}\par
+\b\par
+\par
+\par
+Functional programming:\par
+1.Write a function that computes xn, where n is an integer. Use the following\par
+recursive definition:\par
+\f1\bullet  xn = y2 if n is even and positive, where y = xn / 2.\par
+\bullet  xn = x\f0\'b7 xn \f1\endash  1 if n is odd and positive.\par
+\bullet  x0 = 1.\par
+\bullet  xn = 1 / x\endash n if n is negative.\par
+Don\rquote t use a return statement\par
+\f0\lang1033 Sol:-\par
+\b0 class Part3\par
+\{\par
+   \tab def computeXn(x: BigDecimal, n: Int): BigDecimal = \par
+\{\par
+\tab  if (n == 0) 1\par
+  \tab else if (n < 0) 1 / computeXn(x, -n)\par
+  \tab else if (n % 2 == 0)\par
+\tab  \{\par
+    \tab\tab val temp = computeXn(x, n / 2)\par
+    \tab\tab temp * temp\par
+  \tab\}\par
+  \tab else x * computeXn(x, n - 1)\par
+\}                              \par
+\}\par
+object Part3\par
+\{ \par
+\tab  def main(args:Array[String])\par
+    \tab\{\par
+        \tab\tab var obj=new Part3()\par
+        \tab\tab println(obj.computeXn(8, 256))                  \par
+        \tab\tab println(obj.computeXn(-20, -100))\tab\tab\tab\par
+        \tab\tab println(obj.computeXn(-2, 50))\tab\par
+    \tab\}\par
+\}\par
+\b\lang9\par
+2. Write a procedure countdown(n: Int) that prints the numbers from n to 0.\par
+Sol:-\par
+\b0 class Part3_2\par
+\{\par
+  \tab def CountDown(n:Int):Unit=\par
+        \tab\{\par
+        \tab\tab if(n==0)\par
+        \tab\tab\{\par
+        \tab\tab\tab println(0)\par
+        \tab\tab\}\par
+        \tab\tab else if(n>0)\par
+        \tab\tab\{\par
+            \tab\tab\tab println(n);\par
+            \tab\tab\tab CountDown(n-1)\par
+        \tab\tab\}\par
+\tab\}\par
+\}\par
+object Part3_2\par
+\{\par
+ \tab  def main(args:Array[String])\par
+    \tab\{\par
+        \tab\tab var obj=new Part3_2()\par
+        \tab\tab obj.CountDown(8)\par
+    \tab\}\par
+\}\par
+\b 3. Write a function that produces all values from an array with duplicates\par
+removed.\par
+Sol:-\par
+\b0 class Part3_3\par
+\{\par
+  \tab  def distinct()\par
+    \tab\{\par
+\tab\tab val ele: Array[Int]=Array(8,4,2,-3,-5,0,4,2,16)\par
+\tab\tab ele.distinct.foreach(println)\par
+\tab\}\par
+\}\par
+object Part3_3\par
+\{\par
+\tab def main(args:Array[String])\par
+\tab\{\par
+\tab\tab var obj=new example3();\par
+\tab\tab obj.distinct()\par
+\tab\}\par
+\}\par
+\b 4. Given an array of integers, produce a new array that contains all positive\par
+values of the original array, in their original order, followed by all values that\par
+are zero or negative, in their original order.\par
+Sol:-\par
+\b0 import scala.collection.mutable.ArrayBuffer\par
+object Part3_4\par
+\{\par
+  \tab def main(args:Array[String])\par
+    \tab\{\par
+\tab\tab val arr: Array[Int]=Array(20,16,-1,10,0,2,-6)\par
+\tab\tab val position, obj =new  ArrayBuffer[Int]() \par
+\tab\tab for(i <- 0 until arr.length)\par
+\tab\tab  \{\par
+\tab\tab\tab if (arr(i) > 0) position += i\par
+\tab\tab\tab else obj += i\par
+\tab\tab\}\par
+\tab\tab val arrbuf=new ArrayBuffer[Int]()             \par
+\tab\tab arrbuf ++= (for(i <- position) yield arr(i))       \par
+\tab\tab arrbuf ++= (for(i <- obj) yield arr(i))         \par
+\tab\tab println(arrbuf.toArray )\par
+\tab\}\par
+\}\par
+\b 5. Given a range of integers by its lower and upper limit, construct a list of all prime numbers in that range.\par
+Sol:-\par
+\b0 class Part3_5\par
+\{\par
+ \tab def primeNum(l:Int,u:Int)\par
+    \tab\{\par
+        \tab\tab var i:Int=0\par
+        \tab\tab var j:Int=0\par
+        \tab\tab for(i<-2 to upper)\par
+        \tab\tab\{ \par
+            \tab\tab\tab var k=0\par
+            \tab\tab\tab for(j<-2 until i )\par
+           \tab\tab\tab  \{\par
+                \tab\tab\tab if(i%j==0)\par
+                \tab\tab\tab\{\par
+                    \tab\tab\tab\tab k=k+1\par
+               \tab\tab\tab\tab\} \par
+            \tab\tab\tab\}\par
+           \tab\tab  \tab if(k<=0)\par
+            \tab\tab\tab\{\par
+               \tab\tab\tab  \tab println(i)\par
+            \tab\tab\tab\}\par
+        \tab\tab\}\par
+\tab\}\par
+\}\par
+object Part3_5\par
+\{\par
+\tab def main(args:Array[String])\par
+\tab\{\par
+\tab\tab var OBJ=new Part3_5();\par
+\tab\tab obj.primeNum(4,16)\par
+\tab\}\par
+\}\par
+\b File Operations:\par
+1. Write a Scala program that reads a text file containing only floating-point numbers. Print the sum, average, maximum, and minimum of the numbers in the file.\par
+Sol:-\par
+\b0\par
+object MyClass\par
+ \{\par
+def statsFromFile(filename: String): Unit = \par
+\{\par
+  \tab val (count, sum, min, max) =\par
+   \tab  io.Source.fromFile(filename).mkString .split("[^0-9\tab {{\field{\*\fldinst{HYPERLINK "\\\\\\\\.-]+").map(_.toFloat).foldLeft((0f"}}{\fldrslt{\\\\.-]+").map(_.toFloat).foldLeft((0f\ul0\cf0}}}}\f0\fs22 , 0f, Float.MaxValue, -Float.MaxValue)) \{\par
+       \tab  case ((count, sum, min, max), elt) => \par
+\tab (\par
+          \tab\tab count + 1,\par
+         \tab\tab  sum + elt,\par
+         \tab\tab  if (elt < min) elt else min,\par
+          \tab\tab if (elt > max) elt else max\par
+        \tab )\par
+      \par
+  println(s"sum=$sum, avg=$\{sum / count\}, min=$min, max=$max")\par
+\}\par
+def main(args: Array[String])\par
+\{\par
+statsFromFile("/tmp/floats.txt")\par
+\}\par
+\}\par
+\b 2. Write a Scala program that counts how many files with .class extension are in a given directory and its subdirectories.\par
+Sol:-\par
+\b0 import java.io.File\par
+object Part4_2\par
+\{\par
+  \tab def main(args: Array[String]) \par
+\tab\{\par
+\par
+def walkFiles(rootDir: File): Iterator[File] = \par
+\{\par
+    val children = rootDir.listFiles\par
+    children.filter(_.isFile).toIterator ++\par
+      children.filter(_.isDirectory).flatMap(walkFiles _)\par
+  \}\par
+def countClassFiles(rootDir: File) =\par
+\{\par
+    walkFiles(rootDir)\par
+      .filter(_.getName.endsWith(".class"))\par
+      .length\par
+\par
+val path = "/Users/Lin/git/scala" \par
+  countClassFiles(new File(path)) \par
+\}\par
+\}\par
+\}\par
+\b\par
+\par
+}
+ 
